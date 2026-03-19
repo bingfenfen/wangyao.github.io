@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>王瑶 · 作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --ink-mid: #5a5650;
+    --ink-light: #a09c96;
+    --paper: #faf9f6;
+    --paper-warm: #f3efe8;
+    --blue: #3d7fc1;
+    --blue-light: #dceaf7;
+    --blue-mid: #9bbfdf;
+    --accent: #c45f3a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(250,249,246,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .nav-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    letter-spacing: -0.3px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 40%, rgba(61,127,193,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 20% 80%, rgba(196,95,58,0.05) 0%, transparent 50%);
+  }
+
+  .hero-inner { max-width: 900px; position: relative; }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.1s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 9vw, 96px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    color: var(--ink);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    font-family: 'Noto Serif SC', serif;
+    color: var(--blue);
+    font-weight: 300;
+    font-size: 0.6em;
+    letter-spacing: 4px;
+    display: block;
+    margin-top: 0.3em;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--ink-mid);
+    max-width: 520px;
+    line-height: 1.85;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.35s forwards;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.45s forwards;
+  }
+
+  .hero-tag {
+    font-size: 12px;
+    padding: 5px 14px;
+    border: 1px solid var(--blue-mid);
+    border-radius: 100px;
+    color: var(--blue);
+    background: var(--blue-light);
+  }
+
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--ink);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.55s forwards;
+  }
+  .hero-cta:hover { color: var(--blue); border-color: var(--blue); }
+
+  .hero-scroll {
+    position: absolute; bottom: 3rem; right: 3rem;
+    font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--ink-light);
+    writing-mode: vertical-rl;
+    display: flex; align-items: center; gap: 12px;
+    opacity: 0;
+    animation: fadeIn 1s 1s forwards;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--ink-light), transparent);
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--blue);
+    font-weight: 400;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--ink);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--paper-warm);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    margin-left: 1rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--paper-warm); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 900px;
+  }
+
+  .about-quote {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--ink);
+    border-left: 3px solid var(--blue);
+    padding-left: 1.5rem;
+  }
+
+  .about-body {
+    font-size: 14px;
+    color: var(--ink-mid);
+    line-height: 1.9;
+  }
+
+  .about-body p + p { margin-top: 1rem; }
+
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* ── ARTICLES ── */
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: rgba(0,0,0,0.06);
+    border: 1.5px solid rgba(0,0,0,0.06);
+  }
+
+  .article-card {
+    background: var(--paper);
+    padding: 2rem;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .article-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+
+  .article-card:hover { background: var(--blue-light); }
+  .article-card:hover::before { transform: scaleX(1); }
+
+  .article-source {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.8rem;
+  }
+
+  .article-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .article-arrow {
+    font-size: 18px;
+    color: var(--blue-mid);
+    transition: transform 0.2s, color 0.2s;
+  }
+  .article-card:hover .article-arrow { transform: translate(4px, -4px); color: var(--blue); }
+
+  /* ── XIAOHONGSHU ── */
+  #xiaohongshu { background: var(--paper-warm); }
+
+  .xhs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .xhs-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .xhs-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  }
+
+  .xhs-thumb {
+    aspect-ratio: 4/3;
+    background: var(--blue-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .xhs-thumb-1 { background: linear-gradient(135deg, #dceaf7 0%, #c5ddf5 100%); }
+  .xhs-thumb-2 { background: linear-gradient(135deg, #fdf0eb 0%, #f5d9cc 100%); }
+  .xhs-thumb-3 { background: linear-gradient(135deg, #edf7f0 0%, #c8e8d2 100%); }
+
+  .xhs-thumb-icon {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(0,0,0,0.2);
+    letter-spacing: -1px;
+  }
+
+  .xhs-body { padding: 1.2rem; }
+
+  .xhs-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-bottom: 0.8rem;
+  }
+
+  .xhs-meta {
+    display: flex; justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-light);
+  }
+
+  .xhs-likes { color: var(--accent); font-weight: 500; }
+
+  /* ── BRAND COLLABS ── */
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 800px;
+  }
+
+  .brand-card {
+    background: var(--paper-warm);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 8px;
+    padding: 2rem;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .brand-card:hover {
+    border-color: var(--blue-mid);
+    background: var(--blue-light);
+  }
+
+  .brand-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .brand-type {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 1rem;
+  }
+
+  .brand-desc {
+    font-size: 13px;
+    color: var(--ink-mid);
+    line-height: 1.7;
+  }
+
+  .brand-link {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 12px;
+    color: var(--blue);
+    margin-top: 1rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink);
+    color: white;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+  }
+
+  #contact .section-num { color: var(--blue-mid); }
+  #contact .section-title { color: white; }
+  #contact .section-line { border-color: rgba(255,255,255,0.1); background: transparent; }
+
+  .contact-tagline {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.5;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-item {
+    display: flex; gap: 1rem; align-items: center;
+  }
+
+  .contact-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    width: 60px;
+    flex-shrink: 0;
+  }
+
+  .contact-value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+  }
+
+  .contact-value:hover { color: var(--blue-mid); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 1.5rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .xhs-grid { grid-template-columns: 1fr 1fr; }
+    .brands-grid { grid-template-columns: 1fr; }
+    .hero-scroll { display: none; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#top">王瑶 Wang Yao</a>
+  <div class="nav-links">
+    <a href="#about">关于我</a>
+    <a href="#articles">公众号</a>
+    <a href="#xiaohongshu">小红书</a>
+    <a href="#brands">品牌合作</a>
+    <a href="#contact">联系</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Creative Editor · Portfolio</p>
+    <h1 class="hero-name">
+      Wang Yao
+      <em>王 · 瑶</em>
+    </h1>
+    <p class="hero-desc">
+      城市人文内容创作者，用文字记录城市与人。<br>
+      曾任深圳、武汉头部号创意编辑，现以独立创作者身份游走于文字与生活之间。
+    </p>
+    <div class="hero-tags">
+      <span class="hero-tag">城市人文</span>
+      <span class="hero-tag">品牌软文</span>
+      <span class="hero-tag">旅行写作</span>
+      <span class="hero-tag">公众号运营</span>
+      <span class="hero-tag">小红书创作</span>
+    </div>
+    <a class="hero-cta" href="#articles">查看作品 →</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">关于我</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div>
+      <p class="about-quote">临近30岁，裸辞去了欧洲。<br>回来后，才真正开始写自己。</p>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">年内容经验</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">35万</div>
+          <div class="stat-label">账号涨粉记录</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2.4万</div>
+          <div class="stat-label">小红书单篇获赞</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">10W+</div>
+          <div class="stat-label">爆款文章多篇</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-body">
+      <p>五年里，我先后在杭州、深圳、武汉的城市头部公众号做创意编辑，写过人文深度、采访过各行各业的普通人，也做过商业品牌的内容策划。</p>
+      <p>2024年，我离开职场，独自去欧洲游学旅居三个月。马耳他的语言学校、意大利的街头、一个人喝酒的夜晚……这些经历成了我重新开始写作的起点。</p>
+      <p>回国后，我把这些见闻发在小红书上，意外破圈，也由此开始探索独立创作的可能。现在，我仍在路上。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES -->
+<section id="articles">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">公众号精选图文</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="articles-grid">
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/371CzxnTuylbloJ6kOA8CQ" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">武汉最野的部落，有精灵出没</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/QgiZdg_V11-DajDwtHzzqw" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">我在武汉拍女孩</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/74Gn_vLEfxeXR0USeSlpNg" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">突发！神秘大人物到访武汉</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/I002q-xnmQV52_SY0I58rA" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">蹦迪吗？武汉地下场子，老板是亲切的有钱人</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/PT_nW01QCUFp9w34W5EvzQ" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">"建议全国普及武汉生烫！"</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+    <a class="article-card" href="https://mp.weixin.qq.com/s/436ieqvtekmFDeM6tzQZzg" target="_blank">
+      <div class="article-source">HANS 汉声</div>
+      <div class="article-title">信阳人说要去省城，其实是要去武汉？</div>
+      <div class="article-arrow">↗</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- XIAOHONGSHU -->
+<section id="xiaohongshu">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">小红书精选</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="xhs-grid">
+
+    <a class="xhs-card" href="http://xhslink.com/o/23dcWtYd2ci" target="_blank">
+      <div class="xhs-thumb xhs-thumb-1">
+        <span class="xhs-thumb-icon">马耳他</span>
+      </div>
+      <div class="xhs-body">
+        <div class="xhs-title">意大利室友不听悲伤的歌——在马耳他念语校的日子</div>
+        <div class="xhs-meta">
+          <span>旅居见闻</span>
+          <span class="xhs-likes">♥ 欧洲系列</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="xhs-card" href="http://xhslink.com/o/6AbGlruooeD" target="_blank">
+      <div class="xhs-thumb xhs-thumb-2">
+        <span class="xhs-thumb-icon">30岁</span>
+      </div>
+      <div class="xhs-body">
+        <div class="xhs-title">30岁裸辞去欧洲，生命重新流动起来</div>
+        <div class="xhs-meta">
+          <span>成长感悟</span>
+          <span class="xhs-likes">♥ 2.4万赞</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="xhs-card" href="http://xhslink.com/o/2m3I8xoIa2g" target="_blank">
+      <div class="xhs-thumb xhs-thumb-3">
+        <span class="xhs-thumb-icon">独处</span>
+      </div>
+      <div class="xhs-body">
+        <div class="xhs-title">一个人喝酒是很小众的行为吗？</div>
+        <div class="xhs-meta">
+          <span>生活随笔</span>
+          <span class="xhs-likes">♥ 精选</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section id="brands">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">品牌合作案例</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="brands-grid">
+
+    <a class="brand-card" href="http://xhslink.com/o/4hwzCM7hS7U" target="_blank">
+      <div class="brand-name">圆周旅迹</div>
+      <div class="brand-type">旅行 App · 长期合作</div>
+      <div class="brand-desc">围绕独立旅行与自我探索主题，持续产出原创图文内容，深度融合品牌调性与个人叙事风格。</div>
+      <div class="brand-link">查看案例 →</div>
+    </a>
+
+    <a class="brand-card" href="http://xhslink.com/o/4zuLXUTDbaM" target="_blank">
+      <div class="brand-name">圆周旅迹</div>
+      <div class="brand-type">旅行 App · 内容合作②</div>
+      <div class="brand-desc">以「突然就懂了独自旅行的意义」为主题，将品牌理念融入个人旅居故事，实现内容自然种草。</div>
+      <div class="brand-link">查看案例 →</div>
+    </a>
+
+    <a class="brand-card" href="http://xhslink.com/o/5qqcPQC3gjo" target="_blank">
+      <div class="brand-name">小宇宙</div>
+      <div class="brand-type">播客平台 · 内容合作</div>
+      <div class="brand-desc">以 INFP 人格与具体生活为切入点，探讨停止爱抽象事物、回归生活本身的成长议题。</div>
+      <div class="brand-link">查看案例 →</div>
+    </a>
+
+    <div class="brand-card" style="pointer-events:none; opacity:0.5;">
+      <div class="brand-name">Olay · 她说 App</div>
+      <div class="brand-type">护肤品牌 / 社交平台</div>
+      <div class="brand-desc">护肤品牌软文推广及社交平台内容合作，案例截图可私信获取。</div>
+      <div class="brand-link" style="color:var(--ink-light)">截图可提供</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">联系我</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="contact-tagline">如果你在做有意思的内容，<br>欢迎聊聊合作。</p>
+    <div class="contact-items">
+      <div class="contact-item">
+        <span class="contact-label">电话</span>
+        <a class="contact-value" href="tel:18668161451">186-6816-1451</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">邮件</span>
+        <a class="contact-value" href="mailto:bingfenfener1126@gmail.com">bingfenfener1126@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">小红书</span>
+        <a class="contact-value" href="#" target="_blank">搜索「王瑶」查看主页</a>
+      </div>
+      <div class="contact-item">
+        <span class="contact-label">坐标</span>
+        <span class="contact-value">武汉</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 王瑶 · 创意编辑作品集</span>
+  <span class="footer-copy">Wang Yao · Creative Editor</span>
+</footer>
+
+</body>
+</html>
